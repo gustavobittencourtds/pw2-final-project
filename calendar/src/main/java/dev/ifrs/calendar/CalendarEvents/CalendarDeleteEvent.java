@@ -13,6 +13,7 @@ import dev.ifrs.calendar.CalendarQuickstart;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -23,9 +24,10 @@ public class CalendarDeleteEvent extends CalendarQuickstart {
   private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
   @DELETE
+  @Path("/{eventId}")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public static void deleteEvent() throws IOException, GeneralSecurityException {
+  public static void deleteEvent(@PathParam("eventId") String eventId) throws IOException, GeneralSecurityException {
 
   final NetHttpTransport HTTP_TRANSPORT =
   GoogleNetHttpTransport.newTrustedTransport();
@@ -35,7 +37,7 @@ public class CalendarDeleteEvent extends CalendarQuickstart {
   .build();
 
   String calendarId = "primary";
-  String eventID = "gbndai5j66rtapfv9guci22fjc_20221220T160000Z";
+  String eventID = eventId;
 
   service.events().delete(calendarId, eventID).execute();
   System.out.println("File deleted");

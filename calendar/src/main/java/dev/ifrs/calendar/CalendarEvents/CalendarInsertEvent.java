@@ -30,7 +30,11 @@ public class CalendarInsertEvent extends CalendarQuickstart {
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
   public Event
-  setEvent(@FormParam("summary") String summary, @FormParam("location") String location,  @FormParam("description") String description) throws IOException, GeneralSecurityException {
+  setEvent(@FormParam("summary") String summary,
+  @FormParam("location") String location,
+  @FormParam("description") String description,
+  @FormParam ("start") DateTime startDateTime,
+  @FormParam ("end") DateTime endDateTime ) throws IOException, GeneralSecurityException {
 
   final NetHttpTransport HTTP_TRANSPORT =
   GoogleNetHttpTransport.newTrustedTransport();
@@ -45,12 +49,12 @@ public class CalendarInsertEvent extends CalendarQuickstart {
   .setDescription(description);
 
   // DateTime startDateTime = new DateTime("2022-12-20T09:00:00-07:00");
-  // EventDateTime start = new EventDateTime()
-  // .setDateTime(startDateTime)
-  // .setTimeZone("America/Sao_Paulo");
-  // event.setStart(start);
+  EventDateTime start = new EventDateTime()
+  .setDateTime(startDateTime)
+  .setTimeZone("America/Sao_Paulo");
+  event.setStart(start);
 
-  DateTime endDateTime = new DateTime("2022-12-24T17:00:00-07:00");
+  // DateTime endDateTime = new DateTime("2022-12-24T17:00:00-07:00");
   EventDateTime end = new EventDateTime()
   .setDateTime(endDateTime)
   .setTimeZone("America/Sao_Paulo");
