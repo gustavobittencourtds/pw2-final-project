@@ -13,11 +13,10 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/remove")
+@Path("/remove/{eventId}")
 public class CalendarDeleteEvent extends CalendarController {
   
   @DELETE
-  @Path("/{eventId}")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
   public static void deleteEvent(@PathParam("eventId") String eventId) throws IOException, GeneralSecurityException {
